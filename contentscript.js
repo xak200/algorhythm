@@ -103,7 +103,7 @@ failureButton.style.color = "black";
 const solutionButton = document.createElement("button");
 solutionButton.setAttribute("id", "solution");
 solutionButton.innerHTML =
-  "Congratulation! You got the right answer. Go be social!";
+  "Congratulations! You got the right answer. Go be social!";
 solutionButton.style.fontSize = "medium";
 solutionButton.style.fontWeight = "bold";
 solutionButton.style.border = "solid";
