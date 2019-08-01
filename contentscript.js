@@ -1,3 +1,16 @@
+const problemsArray = [
+  [
+    "Problem: Given a number, write a function multiplyByThree that takes one argument, num, and returns the number times three.<br><br>function multiplyByThree(num) {",
+    "return num * 3"
+  ],
+  [
+    "Problem: Given a number, write a function subtractOneHundredAndThirtySeven that takes one argument, num, and returns the number minus 137.<br><br>function subtractOneHundredAndThirtySeven(num) {",
+    "return num - 137"
+  ]
+];
+
+const randNum = Math.floor(Math.random() * problemsArray.length);
+
 const cover = document.createElement("div");
 cover.setAttribute("id", "coverDiv");
 cover.style.backgroundColor = "#24e3aa";
@@ -17,26 +30,48 @@ welcomeText.innerHTML =
 welcomeText.style.textAlign = "center";
 welcomeText.style.lineHeight = "1.5em";
 welcomeText.style.fontSize = "x-large";
-welcomeText.style.color = "white";
+welcomeText.style.fontStyle = "italic";
+welcomeText.style.color = "black";
 welcomeText.style.fontFamily = "Georgia";
 cover.appendChild(welcomeText);
 
 const algoProb = document.createElement("div");
-algoProb.innerHTML =
-  "PROBLEM: Given a number, write a function that returns a value equal to the number times three.<br><br><br><br>";
+algoProb.innerHTML = problemsArray[randNum][0];
 algoProb.style.fontSize = "large";
+algoProb.style.fontWeight = "bold";
 algoProb.style.textAlign = "center";
-algoProb.style.color = "white";
+algoProb.style.color = "black";
 algoProb.style.fontFamily = "Georgia";
+
+const solutionBox = document.createElement("div");
+solutionBox.innerHTML = problemsArray[randNum][1];
+solutionBox.style.fontSize = "large";
+solutionBox.style.textAlign = "center";
+solutionBox.style.color = "white";
+solutionBox.style.fontFamily = "Georgia";
+// how would you add the solution before the page resets back to the original content?
 
 cover.appendChild(algoProb);
 
+// text editor
+const textEditor = document.createElement("textarea");
+textEditor.setAttribute("rows", 20);
+textEditor.setAttribute("cols", 10);
+textEditor.setAttribute("id", "textEditorID");
+textEditor.style.display = "block";
+textEditor.style.margin = "10px auto";
+textEditor.style.height = "150px";
+textEditor.style.width = "300px";
+cover.appendChild(textEditor);
+
+// button container
 const buttonContainer = document.createElement("div");
 buttonContainer.style.display = "flex";
 buttonContainer.style.flexDirection = "row";
 buttonContainer.style.justifyContent = "space-around";
 cover.appendChild(buttonContainer);
 
+// complete button
 const completeButton = document.createElement("button");
 completeButton.setAttribute("id", "complete");
 completeButton.innerHTML = "I solved it! (Trust me).";
@@ -50,6 +85,7 @@ completeButton.style.backgroundColor = "#ff5ca3";
 completeButton.style.fontFamily = "sans-serif";
 completeButton.style.color = "black";
 
+// failure button
 const failureButton = document.createElement("button");
 failureButton.setAttribute("id", "failure");
 failureButton.innerHTML = "I don't want to be a developer.";
@@ -63,20 +99,23 @@ failureButton.style.backgroundColor = "#ff5ca3";
 failureButton.style.fontFamily = "sans-serif";
 failureButton.style.color = "black";
 
+// solution Button
+const solutionButton = document.createElement("button");
+solutionButton.setAttribute("id", "solution");
+solutionButton.innerHTML =
+  "Congratulation! You got the right answer. Go be social!";
+solutionButton.style.fontSize = "medium";
+solutionButton.style.fontWeight = "bold";
+solutionButton.style.border = "solid";
+solutionButton.style.borderRadius = "7px";
+solutionButton.style.padding = "10px 5px 10px 5px";
+solutionButton.style.borderColor = "#ff5ca3";
+solutionButton.style.backgroundColor = "#ff5ca3";
+solutionButton.style.fontFamily = "sans-serif";
+solutionButton.style.color = "black";
+
 buttonContainer.appendChild(completeButton);
 buttonContainer.appendChild(failureButton);
-
-// const facebookMainTag = document.querySelector("#u_0_15");
-// const twitterMainTag = document.querySelector("#doc");
-// const redditMainTag = document.querySelector();
-// const instagramMainTag = document.querySelector();
-// const buzzfeedMainTag = document.querySelector();
-// const youtubeMainTag = document.querySelector();
-
-// facebookMainTag.hidden = true;
-// twitterMainTag.hidden = true;
-
-// array of ids; one by one send it to our function
 
 function checkId() {
   if (document.querySelector("#doc") !== null) {
@@ -89,23 +128,6 @@ function checkId() {
     let youtubeTag = document.querySelector("ytd-app");
     youtubeTag.hidden = true;
   }
-
-  //   } else if (document.querySelector("._1nxEQl5D2Bx2jxDILRHemb  ") !== null) {
-  //     let redditTag = document.querySelector("._1nxEQl5D2Bx2jxDILRHemb  ");
-  //     redditTag.hidden = true;
-  // consider removing; header still displays.... ??
-  //   } else if (document.querySelector(".page-content") !== null) {
-  //     let buzzfeedTag = document.querySelector(".page-content");
-  //     // let otherTag = document.querySelector(".xs-relative");
-  //     buzzfeedTag.hidden = true;
-  //     // otherTag.hidden = true;
-  // //  } else if (document.querySelector("ytd-app") !== null) {
-  //     let youtubeTag = document.querySelector("ytd-app");
-  //     youtubeTag.hidden = true;
-  // //   } else if (document.querySelector(".SCxLW  o64aR") !== null) {
-  //     let instagramTag = document.querySelector(".SCxLW  o64aR");
-  //     instagramTag.hidden = true;
-  //   }
 }
 
 checkId();
@@ -116,8 +138,7 @@ const completeClick = document.querySelector("#complete");
 const failureClick = document.querySelector("#failure");
 const coverDivRef = document.querySelector("#coverDiv");
 
-completeClick.addEventListener("click", function() {
-  console.log("THAAAAANKS");
+function dismissAlgorhythm() {
   if (document.querySelector("#doc") !== null) {
     let twitterTag = document.querySelector("#doc");
     twitterTag.hidden = false;
@@ -131,20 +152,40 @@ completeClick.addEventListener("click", function() {
     youtubeTag.hidden = false;
     coverDivRef.hidden = true;
   }
-});
+}
 
-failureClick.addEventListener("click", function() {
-  if (document.querySelector("#doc") !== null) {
-    let twitterTag = document.querySelector("#doc");
-    twitterTag.hidden = false;
-    coverDivRef.hidden = true;
-  } else if (document.querySelector("#u_0_15") !== null) {
-    let facebookTag = document.querySelector("#u_0_15");
-    facebookTag.hidden = false;
-    coverDivRef.hidden = true;
-  } else if (document.querySelector("ytd-app") !== null) {
-    let youtubeTag = document.querySelector("ytd-app");
-    youtubeTag.hidden = false;
-    coverDivRef.hidden = true;
+function revealSolution() {
+  algoProb.appendChild(solutionBox);
+  // setTimeout(dismissAlgorhythm, 4500);
+  completeClick.hidden = true;
+  failureClick.hidden = true;
+  cover.appendChild(solutionButton);
+}
+
+completeClick.addEventListener("click", evaluateUserInput); // => change to evaluate userInput
+failureClick.addEventListener("click", dismissAlgorhythm);
+solutionButton.addEventListener("click", dismissAlgorhythm);
+
+function evaluateUserInput() {
+  const userInput = textEditor.value;
+  const userFunction = new Function("num", userInput);
+  const ourFunction = new Function("num", problemsArray[randNum][1]);
+
+  if (userFunction(3) === ourFunction(3)) {
+    revealSolution();
+  } else {
+    // append to solutionBox
+    // completeClick.innerHTML = "Incorrect! Refactor, then run your code again.";
+    const wrongAnswer = document.createElement("div");
+    wrongAnswer.innerHTML =
+      "<br>Sorry, your answer is incorrect. Refactor your code and try again!";
+    wrongAnswer.style.textAlign = "center";
+    wrongAnswer.style.lineHeight = "1.5em";
+    wrongAnswer.style.fontSize = "large";
+    wrongAnswer.style.fontStyle = "italic";
+    wrongAnswer.style.color = "black";
+    wrongAnswer.style.fontFamily = "Georgia";
+
+    cover.append(wrongAnswer);
   }
-});
+}
