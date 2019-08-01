@@ -26,7 +26,7 @@ document.body.appendChild(cover);
 
 const welcomeText = document.createElement("div");
 welcomeText.innerHTML =
-  "It's Algorhythm time!<br><br> Solve this algorithm problem before continuing to your regularly scheduled interwebz.<br><br>";
+  "It's algoRhythm time!<br><br> Solve this algoRhythm problem before continuing to your regularly scheduled interwebz.<br><br>";
 welcomeText.style.textAlign = "center";
 welcomeText.style.lineHeight = "1.5em";
 welcomeText.style.fontSize = "x-large";
@@ -43,12 +43,12 @@ algoProb.style.textAlign = "center";
 algoProb.style.color = "black";
 algoProb.style.fontFamily = "Georgia";
 
-const solutionBox = document.createElement("div");
-solutionBox.innerHTML = problemsArray[randNum][1];
-solutionBox.style.fontSize = "large";
-solutionBox.style.textAlign = "center";
-solutionBox.style.color = "white";
-solutionBox.style.fontFamily = "Georgia";
+// const solutionBox = document.createElement("div");
+// solutionBox.innerHTML = problemsArray[randNum][1];
+// solutionBox.style.fontSize = "large";
+// solutionBox.style.textAlign = "center";
+// solutionBox.style.color = "black";
+// solutionBox.style.fontFamily = "Georgia";
 // how would you add the solution before the page resets back to the original content?
 
 cover.appendChild(algoProb);
@@ -155,7 +155,7 @@ function dismissAlgorhythm() {
 }
 
 function revealSolution() {
-  algoProb.appendChild(solutionBox);
+  // algoProb.appendChild(solutionBox);
   // setTimeout(dismissAlgorhythm, 4500);
   completeClick.hidden = true;
   failureClick.hidden = true;
@@ -166,26 +166,26 @@ completeClick.addEventListener("click", evaluateUserInput); // => change to eval
 failureClick.addEventListener("click", dismissAlgorhythm);
 solutionButton.addEventListener("click", dismissAlgorhythm);
 
+const wrongAnswer = document.createElement("div");
+wrongAnswer.innerHTML =
+  "<br>Sorry, your answer is incorrect. Refactor your code and try again!";
+wrongAnswer.style.textAlign = "center";
+wrongAnswer.style.lineHeight = "1.5em";
+wrongAnswer.style.fontSize = "large";
+wrongAnswer.style.fontStyle = "italic";
+wrongAnswer.style.color = "black";
+wrongAnswer.style.fontFamily = "Georgia";
+
 function evaluateUserInput() {
   const userInput = textEditor.value;
   const userFunction = new Function("num", userInput);
   const ourFunction = new Function("num", problemsArray[randNum][1]);
-
-  if (userFunction(3) === ourFunction(3)) {
-    revealSolution();
-  } else {
-    // append to solutionBox
-    // completeClick.innerHTML = "Incorrect! Refactor, then run your code again.";
-    const wrongAnswer = document.createElement("div");
-    wrongAnswer.innerHTML =
-      "<br>Sorry, your answer is incorrect. Refactor your code and try again!";
-    wrongAnswer.style.textAlign = "center";
-    wrongAnswer.style.lineHeight = "1.5em";
-    wrongAnswer.style.fontSize = "large";
-    wrongAnswer.style.fontStyle = "italic";
-    wrongAnswer.style.color = "black";
-    wrongAnswer.style.fontFamily = "Georgia";
-
+  try {
+    if (userFunction(3) === ourFunction(3)) {
+      revealSolution();
+      wrongAnswer.hidden = true;
+    }
+  } catch {
     cover.append(wrongAnswer);
   }
 }
