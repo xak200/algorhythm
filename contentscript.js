@@ -62,6 +62,7 @@ textEditor.style.display = "block";
 textEditor.style.margin = "10px auto";
 textEditor.style.height = "150px";
 textEditor.style.width = "300px";
+textEditor.style.fontFamily = "Lucida Console";
 cover.appendChild(textEditor);
 
 // button container
